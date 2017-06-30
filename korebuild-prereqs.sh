@@ -9,4 +9,4 @@ fi
 # echo on
 set -x
 
-apt install unzip libunwind8
+apt install unzip libunwind8 libcurl3
