@@ -1,4 +1,4 @@
-alias a="nano ~/.bash_aliases; source ~/.bash_aliases"
+alias a="nano ~/scripts/.bash_aliases; source ~/scripts/.bash_aliases"
 
 alias b="git branch"
 __git_complete b _git_branch
