@@ -1,16 +1,27 @@
+source /usr/share/bash-completion/completions/git
+
 alias a="nano ~/scripts/.bash_aliases; source ~/scripts/.bash_aliases"
 
-alias b="git branch"
-__git_complete b _git_branch
+alias g="git"
+__git_complete g __git_main
 
-alias c="git checkout"
-__git_complete c _git_checkout
+alias gb="git branch"
+__git_complete gb _git_branch
 
-alias l="git log"
-__git_complete c _git_log
+alias gc="git checkout"
+__git_complete gc _git_checkout
 
-alias m="git merge"
-__git_complete m _git_merge
+alias gf="git fetch"
+__git_complete gf _git_fetch
 
-alias p="git pull"
-__git_complete p _git_pull
+alias gl="git log"
+__git_complete gl _git_log
+
+alias gm="git merge"
+__git_complete gm _git_merge
+
+alias gp="git pull"
+__git_complete gp _git_pull
+
+alias gw="git worktree"
+__git_complete gw _git_worktree
