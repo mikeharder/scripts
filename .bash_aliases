@@ -23,6 +23,9 @@ __git_complete gl _git_log
 alias gm="git merge"
 __git_complete gm _git_merge
 
+alias gp="git pull"
+__git_complete gp _git_pull
+
 alias gs="git status"
 __git_complete gs _git_status
 
