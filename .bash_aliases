@@ -2,6 +2,8 @@ source /usr/share/bash-completion/completions/git
 
 alias a="nano ~/scripts/.bash_aliases; source ~/scripts/.bash_aliases"
 
+alias sf="~/scripts/sync-forks.sh"
+
 alias g="git"
 __git_complete g __git_main
 
