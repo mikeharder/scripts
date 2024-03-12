@@ -13,3 +13,4 @@ gh repo sync mikeharder/typespec &
 gh repo sync mikeharder/typespec-azure &
 gh repo sync mikeharder/cadl-ranch &
 gh repo sync mikeharder/autorest.csharp &
+gh repo sync mikeharder/openapi-diff &
