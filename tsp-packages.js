@@ -13,6 +13,7 @@ const packages = [
     "@typespec/compiler",
     "@typespec/http",
     "@typespec/openapi",
+    "@typespec/openapi3",
     "@typespec/rest",
     "@typespec/versioning",
 ];
