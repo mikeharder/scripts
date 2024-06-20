@@ -1,3 +1,8 @@
+# # ~/.bash_aliases
+# if [ -f ~/scripts/.bash_aliases ]; then
+#     . ~/scripts/.bash_aliases
+# fi
+
 source /usr/share/bash-completion/completions/git
 
 alias a='alias'
