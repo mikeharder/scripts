@@ -1,17 +1,8 @@
-gh repo sync mikeharder/azure-sdk-tools &
-gh repo sync mikeharder/azure-sdk-for-net &
-gh repo sync mikeharder/azure-sdk-for-java &
-gh repo sync mikeharder/azure-sdk-for-js &
-gh repo sync mikeharder/azure-sdk-for-python &
-gh repo sync mikeharder/azure-sdk-for-cpp &
-gh repo sync mikeharder/azure-sdk-for-ios &
-gh repo sync mikeharder/azure-dev &
-gh repo sync mikeharder/azure-openapi-validator &
-gh repo sync mikeharder/azure-rest-api-specs &
-gh repo sync mikeharder/azure-rest-api-specs-pr &
-gh repo sync mikeharder/typespec &
-gh repo sync mikeharder/typespec-azure &
-gh repo sync mikeharder/cadl-ranch &
-gh repo sync mikeharder/autorest &
-gh repo sync mikeharder/autorest.csharp &
-gh repo sync mikeharder/openapi-diff &
+#!/bin/bash
+
+# Get the directory of the script
+SCRIPT_DIR=$(dirname "$(realpath "$0")")
+
+while IFS= read -r repo; do
+  gh repo sync mikeharder/$repo &
+done < "$SCRIPT_DIR/sync-forks.txt"
