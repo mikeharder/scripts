@@ -1,0 +1,17 @@
+azure-sdk-tools
+azure-sdk-for-net
+azure-sdk-for-java
+azure-sdk-for-js
+azure-sdk-for-python
+azure-sdk-for-cpp
+azure-sdk-for-ios
+azure-dev
+azure-openapi-validator
+azure-rest-api-specs
+azure-rest-api-specs-pr
+typespec
+typespec-azure
+cadl-ranch
+autorest
+autorest.csharp
+openapi-diff
