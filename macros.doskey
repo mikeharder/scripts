@@ -16,3 +16,5 @@ gs=git status $*
 gw=git worktree $*
 
 regadd=echo (as admin) reg add "HKLM\Software\Microsoft\Command Processor" /v AutoRun /d "doskey /macrofile=c:\git\scripts\macros.doskey" /f
+
+sf=c:\git\scripts\sync-forks.cmd $*
