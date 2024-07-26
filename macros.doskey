@@ -1,0 +1,18 @@
+a=doskey /macros | sort
+ea=doskey /macrofile=c:\git\scripts\macros.doskey
+
+ls=dir /b
+
+g=git $*
+gb=git branch $*
+gc=git checkout $*
+gcl=git clean -xdf $*
+gd=git diff $*
+gf=git fetch $*
+gl=git log $*
+gm=git merge $*
+gp=git pull $*
+gs=git status $*
+gw=git worktree $*
+
+regadd=echo (as admin) reg add "HKLM\Software\Microsoft\Command Processor" /v AutoRun /d "doskey /macrofile=c:\git\scripts\macros.doskey" /f
