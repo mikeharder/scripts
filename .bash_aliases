@@ -5,7 +5,9 @@
 
 source /usr/share/bash-completion/completions/git
 
-alias a='alias'
+alias a='cat ~/scripts/.bash_aliases'
+
+alias c='clear'
 
 alias ea='nano ~/scripts/.bash_aliases; source ~/scripts/.bash_aliases'
 
@@ -14,7 +16,7 @@ alias tp='~/scripts/tsp-packages.py'
 
 # azure-rest-api-specs
 alias lintdiff='npm exec --yes -- \
-autorest@3.6.1 \
+autorest@3.7.1 \
 --v3 \
 --spectral \
 --azure-validator \
@@ -22,7 +24,16 @@ autorest@3.6.1 \
 --model-validator=false \
 --openapi-type=data-plane \
 --openapi-subtype=data-plane \
---use=@microsoft.azure/openapi-validator@2.2.0'
+--use=@microsoft.azure/openapi-validator@2.2.3'
+
+# azure-rest-api-specs-pr
+gapprove() {
+    local start=$1
+    local end=$2
+    for pr in $(seq "$start" "$end"); do
+        gh pr review "$pr" --approve
+    done
+}
 
 # git
 alias g='git'
@@ -51,6 +62,10 @@ __git_complete gm _git_merge
 
 alias gp='git pull'
 __git_complete gp _git_pull
+
+alias gpr='gh pr list'
+
+alias gprme='gh pr list --search "review-requested:@me"'
 
 alias gs='git status'
 __git_complete gs _git_status
