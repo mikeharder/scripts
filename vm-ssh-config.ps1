@@ -1,4 +1,4 @@
-$ip = Get-NetNeighbor -LinkLayerAddress 00-15-5d-*
+$ip = Get-NetNeighbor -State Permanent -LinkLayerAddress 00-15-5d-*
 
 $content = "Host mharder-dev-u24" + [Environment]::NewLine + `
            "  HostName " + $ip.IPAddress + [Environment]::NewLine + `
