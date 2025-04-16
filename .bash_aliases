@@ -36,6 +36,10 @@ gapprove() {
 }
 
 # git
+
+## Limit completion to only local branches
+export GIT_COMPLETION_CHECKOUT_NO_GUESS="1"
+
 alias g='git'
 __git_complete g __git_main
 
