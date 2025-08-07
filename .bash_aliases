@@ -3,6 +3,8 @@
 #     . ~/scripts/.bash_aliases
 # fi
 
+export PS1='\[\033[01;34m\]\w\[\033[00m\]\$ '
+
 source /usr/share/bash-completion/completions/git
 
 alias a='cat ~/scripts/.bash_aliases'
