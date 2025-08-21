@@ -57,6 +57,8 @@ __git_complete gcl _git_clean
 alias gd='git diff'
 __git_complete gd _git_diff
 
+alias ge='git commit -m "empty" --allow-empty'
+
 alias gf='git fetch'
 __git_complete gf _git_fetch
 
