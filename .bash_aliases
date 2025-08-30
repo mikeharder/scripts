@@ -78,5 +78,7 @@ alias gprme='gh pr list --search "review-requested:@me"'
 alias gs='git status'
 __git_complete gs _git_status
 
+alias gsp='gh repo sync; git pull'
+
 alias gw='git worktree'
 __git_complete gw _git_worktree
