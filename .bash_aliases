@@ -13,7 +13,12 @@ alias c='clear'
 
 alias ea='nano ~/scripts/.bash_aliases; source ~/scripts/.bash_aliases'
 
-alias sf='~/scripts/sync-forks.sh'
+sf() {
+  local repo=$(git remote get-url origin | sed -E 's#.*github\.com[:/](.+)\.git#\1#')
+  echo "gh repo sync $repo"
+  gh repo sync "$repo"
+}
+
 alias tp='~/scripts/tsp-packages.py'
 
 # azure-rest-api-specs
