@@ -8,13 +8,13 @@ set -euo pipefail
 # Disable pager for gh CLI to prevent interactive prompts
 export GH_PAGER=""
 
-if [[ $# -ne 2 ]]; then
-  echo "Usage: $0 <owner> <repo>"
+if [[ ${#} -ne 2 ]]; then
+  echo "Usage: ${0} <owner> <repo>"
   exit 1
 fi
 
-OWNER=$1
-REPO=$2
+OWNER=${1}
+REPO=${2}
 
 # ensure GH CLI is logged in
 if ! gh auth status > /dev/null 2>&1; then
@@ -25,22 +25,22 @@ fi
 # get IDs of only active workflows
 active_ids=$(gh api \
   --method GET \
-  /repos/"$OWNER"/"$REPO"/actions/workflows \
+  /repos/"${OWNER}"/"${REPO}"/actions/workflows \
   --paginate \
   --jq '.workflows[] | select(.state=="active") | .id')
 
-if [[ -z "$active_ids" ]]; then
-  echo "No active workflows to disable in $OWNER/$REPO."
+if [[ -z "${active_ids}" ]]; then
+  echo "No active workflows to disable in ${OWNER}/${REPO}."
   exit 0
 fi
 
-for id in $active_ids; do
+for id in ${active_ids}; do
   echo -n "Disabling workflow ID ${id}… "
   gh api \
     --method PUT \
-    /repos/"$OWNER"/"$REPO"/actions/workflows/"$id"/disable \
+    /repos/"${OWNER}"/"${REPO}"/actions/workflows/"${id}"/disable \
     && echo "OK" \
     || echo "FAILED"
 done
 
-echo "✅ Done—disabled all active workflows in $OWNER/$REPO."
+echo "✅ Done—disabled all active workflows in ${OWNER}/${REPO}."
