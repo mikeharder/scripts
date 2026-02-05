@@ -22,6 +22,7 @@ jobs:
         with:
           files: |
             **.sh
+          separator: '\n'
       
       - name: Run shellcheck on changed files
         if: steps.changed-files.outputs.any_changed == 'true'
@@ -32,8 +33,10 @@ jobs:
           echo "$ALL_CHANGED_FILES"
           echo ""
           
-          # Run shellcheck on each changed file
-          for file in $ALL_CHANGED_FILES; do
-            echo "Checking $file..."
-            shellcheck "$file"
-          done
+          # Run shellcheck on each changed file (newline-separated)
+          while IFS= read -r file; do
+            if [ -n "$file" ]; then
+              echo "Checking $file..."
+              shellcheck "$file"
+            fi
+          done <<< "$ALL_CHANGED_FILES"
