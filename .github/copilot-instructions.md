@@ -103,6 +103,16 @@ Currently, there is no automated test suite. Manual testing is performed by:
 - Exit with appropriate status codes (0 for success, non-zero for errors)
 - Use descriptive echo messages with emojis for user feedback (✅ ❌ ⚠️)
 
+### GitHub Actions Workflows
+
+- Set permissions at the workflow level as the default
+- Only override permissions at the job level when specific jobs need different access
+- Use latest versions of actions (e.g., `actions/checkout@v6`)
+- Use `ubuntu-slim` runner for lightweight, fast-running tasks (linting, formatting, etc.)
+- Use `ubuntu-latest` for resource-intensive or long-running tasks
+- Always set explicit permissions following the principle of least privilege
+- Use custom code over third-party actions when simple and maintainable
+
 ## Known Limitations
 
 - No automated testing infrastructure
