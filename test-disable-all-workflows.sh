@@ -22,6 +22,22 @@ fi
 
 if [[ "$1" == "api" ]]; then
   if [[ "$*" == *"/actions/workflows"* && "$*" != *"/disable"* ]]; then
+    # Check if testing empty repo
+    if [[ "$*" == *"empty-repo"* ]]; then
+      # Return empty workflow list for empty-repo
+      if [[ "$*" == *"--jq"* ]]; then
+        # No output for empty list
+        exit 0
+      else
+        cat << 'JSON'
+{
+  "workflows": []
+}
+JSON
+        exit 0
+      fi
+    fi
+    
     # Check if jq filter is requested (simulates --jq)
     if [[ "$*" == *"--jq"* ]]; then
       # Return just the IDs of active workflows (simulating the jq filter)
@@ -95,6 +111,19 @@ if echo "$OUTPUT" | grep -q "Usage"; then
   echo "✅ Test 2 passed"
 else
   echo "❌ Test 2 failed - should show usage message"
+  exit 1
+fi
+
+echo ""
+
+# Test 3: Verify script handles empty workflow list
+echo "Test 3: Verify script handles empty workflow list"
+OUTPUT=$(node /home/runner/work/scripts/scripts/disable-all-workflows.js test-owner empty-repo 2>&1)
+if echo "$OUTPUT" | grep -q "No active workflows"; then
+  echo "✅ Test 3 passed"
+else
+  echo "❌ Test 3 failed - should handle empty workflow list"
+  echo "Output: $OUTPUT"
   exit 1
 fi
 
