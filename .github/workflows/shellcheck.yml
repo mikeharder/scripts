@@ -28,7 +28,7 @@ jobs:
           echo ""
           
           # Get changed shell scripts
-          CHANGED_FILES=$(git diff --name-only --diff-filter=ACMRT "$BASE_SHA..$HEAD_SHA" | grep '\.sh$' || true)
+          CHANGED_FILES=$(git diff --name-only --diff-filter=ACMRT "$BASE_SHA...$HEAD_SHA" | grep '\.sh$' || true)
           
           if [ -z "$CHANGED_FILES" ]; then
             echo "No shell scripts changed in this PR"
