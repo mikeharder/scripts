@@ -5,6 +5,9 @@
 
 set -euo pipefail
 
+# Get the directory of this script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Create a temporary directory for our mock
 MOCK_DIR=$(mktemp -d)
 trap "rm -rf $MOCK_DIR" EXIT
@@ -95,7 +98,7 @@ echo ""
 
 # Test 1: Run the script with mock data
 echo "Test 1: Running disable-all-workflows.js with mock owner/repo"
-if node /home/runner/work/scripts/scripts/disable-all-workflows.js test-owner test-repo; then
+if node "$SCRIPT_DIR/disable-all-workflows.js" test-owner test-repo; then
   echo "✅ Test 1 passed"
 else
   echo "❌ Test 1 failed"
@@ -106,7 +109,7 @@ echo ""
 
 # Test 2: Verify script requires correct arguments
 echo "Test 2: Verify script requires arguments"
-OUTPUT=$(node /home/runner/work/scripts/scripts/disable-all-workflows.js 2>&1 || true)
+OUTPUT=$(node "$SCRIPT_DIR/disable-all-workflows.js" 2>&1 || true)
 if echo "$OUTPUT" | grep -q "Usage"; then
   echo "✅ Test 2 passed"
 else
@@ -118,7 +121,7 @@ echo ""
 
 # Test 3: Verify script handles empty workflow list
 echo "Test 3: Verify script handles empty workflow list"
-OUTPUT=$(node /home/runner/work/scripts/scripts/disable-all-workflows.js test-owner empty-repo 2>&1)
+OUTPUT=$(node "$SCRIPT_DIR/disable-all-workflows.js" test-owner empty-repo 2>&1)
 if echo "$OUTPUT" | grep -q "No active workflows"; then
   echo "✅ Test 3 passed"
 else

@@ -50,7 +50,7 @@ async function main() {
       await exec(`gh api --method PUT /repos/${owner}/${repo}/actions/workflows/${id}/disable`);
       console.log('OK');
     } catch (error) {
-      console.log('FAILED');
+      console.log(`FAILED: ${error.message}`);
     }
   }
 
