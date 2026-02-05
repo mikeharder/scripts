@@ -9,6 +9,8 @@ jobs:
   shellcheck:
     name: Run Shellcheck
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     
     steps:
       - name: Checkout code
