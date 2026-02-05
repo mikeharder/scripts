@@ -32,7 +32,7 @@ if [[ -z "$active_ids" ]]; then
 fi
 
 for id in $active_ids; do
-  echo -n "Disabling workflow ID $id… "
+  echo -n "Disabling workflow ID ${id}… "
   gh api \
     --method PUT \
     /repos/"$OWNER"/"$REPO"/actions/workflows/"$id"/disable \
