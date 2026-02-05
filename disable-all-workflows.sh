@@ -5,6 +5,9 @@
 
 set -euo pipefail
 
+# Disable pager for gh CLI to prevent interactive prompts
+export GH_PAGER=""
+
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <owner> <repo>"
   exit 1
