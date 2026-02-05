@@ -1,0 +1,54 @@
+name: Shellcheck
+
+on:
+  pull_request:
+    paths:
+      - '**.sh'
+
+permissions:
+  contents: read
+
+jobs:
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-slim
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      
+      - name: Run shellcheck on changed files
+        run: |
+          # Get the base branch
+          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          HEAD_SHA="${{ github.sha }}"
+          
+          echo "Comparing $BASE_SHA...$HEAD_SHA"
+          echo ""
+          
+          # Get changed shell scripts
+          CHANGED_FILES=$(git diff --name-only --diff-filter=ACMRT "$BASE_SHA...$HEAD_SHA" | grep '\.sh$' || true)
+          
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No shell scripts changed in this PR"
+            exit 0
+          fi
+          
+          echo "Changed shell scripts:"
+          echo "$CHANGED_FILES"
+          echo ""
+          
+          # Run shellcheck on each changed file
+          exit_code=0
+          while IFS= read -r file; do
+            if [ -n "$file" ]; then
+              echo "Checking $file..."
+              if ! shellcheck "$file"; then
+                exit_code=1
+              fi
+            fi
+          done <<< "$CHANGED_FILES"
+          
+          exit "$exit_code"
