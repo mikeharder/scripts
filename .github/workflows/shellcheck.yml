@@ -31,10 +31,10 @@ jobs:
           echo ""
           
           # Run shellcheck on each changed file
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          while IFS= read -r file; do
             echo "Checking $file..."
             shellcheck "$file"
-          done
+          done <<< "${{ steps.changed-files.outputs.all_changed_files }}"
       
       - name: No shell scripts changed
         if: steps.changed-files.outputs.any_changed == 'false'
