@@ -33,6 +33,9 @@ fi
 
 for id in $active_ids; do
   echo -n "Disabling workflow ID $id… "
+  # TODO: Remove this test line - intentional shellcheck error for testing
+  test_var=$id
+  echo $test_var > /dev/null
   gh api \
     --method PUT \
     /repos/"$OWNER"/"$REPO"/actions/workflows/"$id"/disable \
