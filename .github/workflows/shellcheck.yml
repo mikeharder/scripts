@@ -1,0 +1,41 @@
+name: Shellcheck
+
+on:
+  pull_request:
+    paths:
+      - '**.sh'
+
+jobs:
+  shellcheck:
+    name: Run Shellcheck
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Get changed shell scripts
+        id: changed-files
+        uses: tj-actions/changed-files@v45
+        with:
+          files: |
+            **.sh
+      
+      - name: Run shellcheck on changed files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          echo "Changed shell scripts:"
+          echo "${{ steps.changed-files.outputs.all_changed_files }}"
+          echo ""
+          
+          # Run shellcheck on each changed file
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "Checking $file..."
+            shellcheck "$file"
+          done
+      
+      - name: No shell scripts changed
+        if: steps.changed-files.outputs.any_changed == 'false'
+        run: echo "No shell scripts were changed in this PR"
