@@ -50,4 +50,4 @@ jobs:
             fi
           done <<< "$CHANGED_FILES"
           
-          exit $exit_code
+          exit "$exit_code"
