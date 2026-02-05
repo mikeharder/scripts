@@ -25,17 +25,15 @@ jobs:
       
       - name: Run shellcheck on changed files
         if: steps.changed-files.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
           echo "Changed shell scripts:"
-          echo "${{ steps.changed-files.outputs.all_changed_files }}"
+          echo "$ALL_CHANGED_FILES"
           echo ""
           
           # Run shellcheck on each changed file
-          while IFS= read -r file; do
+          for file in $ALL_CHANGED_FILES; do
             echo "Checking $file..."
             shellcheck "$file"
-          done <<< "${{ steps.changed-files.outputs.all_changed_files }}"
-      
-      - name: No shell scripts changed
-        if: steps.changed-files.outputs.any_changed == 'false'
-        run: echo "No shell scripts were changed in this PR"
+          done
