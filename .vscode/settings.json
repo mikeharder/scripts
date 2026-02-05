@@ -1,0 +1,6 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "od": true,
+        "hexdump": true
+    }
+}

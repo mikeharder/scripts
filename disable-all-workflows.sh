@@ -5,6 +5,9 @@
 
 set -euo pipefail
 
+# Disable pager for gh CLI to prevent interactive prompts
+export GH_PAGER=""
+
 if [[ $# -ne 2 ]]; then
   echo "Usage: $0 <owner> <repo>"
   exit 1
@@ -32,7 +35,7 @@ if [[ -z "$active_ids" ]]; then
 fi
 
 for id in $active_ids; do
-  echo -n "Disabling workflow ID $id… "
+  echo -n "Disabling workflow ID ${id}… "
   gh api \
     --method PUT \
     /repos/"$OWNER"/"$REPO"/actions/workflows/"$id"/disable \
