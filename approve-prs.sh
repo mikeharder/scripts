@@ -25,16 +25,31 @@ REPO="$1"
 AUTHOR="$2"
 shift 2  # Remove repo and author from arguments
 
+# Escape a title string for safe use in a GitHub search phrase.
+# - Escapes backslashes and double quotes, so the result can be wrapped in "
+escape_github_search_phrase() {
+  local s=$1
+  s=${s//\\/\\\\}
+  s=${s//\"/\\\"}
+  printf '%s' "$s"
+}
+
 # Build search query for multiple title strings (OR logic)
 SEARCH_QUERY=""
+TITLE_COUNT=$#
 for TITLE_STRING in "$@"; do
+  ESCAPED_TITLE=$(escape_github_search_phrase "$TITLE_STRING")
   if [[ -z "$SEARCH_QUERY" ]]; then
-    SEARCH_QUERY="$TITLE_STRING in:title"
+    SEARCH_QUERY="\"$ESCAPED_TITLE\" in:title"
   else
-    SEARCH_QUERY="$SEARCH_QUERY OR $TITLE_STRING in:title"
+    SEARCH_QUERY="$SEARCH_QUERY OR \"$ESCAPED_TITLE\" in:title"
   fi
 done
 
+# Parenthesize combined OR clauses for clarity when multiple titles are used
+if [[ "$TITLE_COUNT" -gt 1 ]]; then
+  SEARCH_QUERY="($SEARCH_QUERY)"
+fi
 # --- Preflight checks ---
 if ! command -v gh &>/dev/null; then
   echo "Error: gh CLI is not installed. See https://cli.github.com"
