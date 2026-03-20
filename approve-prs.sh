@@ -62,6 +62,7 @@ if ! gh auth status &>/dev/null; then
 fi
 
 # --- Fetch matching PRs ---
+echo "Search query: $SEARCH_QUERY"
 echo "Fetching PRs..."
 PR_LIST=$(gh pr list \
   --repo "$REPO" \
