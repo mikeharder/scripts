@@ -22,6 +22,13 @@ if ! gh auth status > /dev/null 2>&1; then
   exit 1
 fi
 
+# block if the logged-in user does not match the target repo owner
+LOGGED_IN_USER=$(gh api /user --jq '.login')
+if [[ "${LOGGED_IN_USER}" != "${OWNER}" ]]; then
+  echo "❌ Logged-in user '${LOGGED_IN_USER}' does not match repo owner '${OWNER}'. Aborting."
+  exit 1
+fi
+
 # get IDs of only active workflows
 active_ids=$(gh api \
   --method GET \
