@@ -23,7 +23,7 @@ if ! gh auth status > /dev/null 2>&1; then
 fi
 
 # block if the logged-in user does not match the target repo owner
-LOGGED_IN_USER=$(gh api /user --jq '.login')
+LOGGED_IN_USER=$(gh auth status --json hosts --jq '.hosts["github.com"][] | select(.active) | .login')
 if [[ "${LOGGED_IN_USER}" != "${OWNER}" ]]; then
   echo "❌ Logged-in user '${LOGGED_IN_USER}' does not match repo owner '${OWNER}'. Aborting."
   exit 1
