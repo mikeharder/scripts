@@ -11,5 +11,5 @@ name=$1
 git worktree add --no-checkout -b "$name" "../$name"
 cd "../$name"
 git sparse-checkout init --cone
-git sparse-checkout set .github/actions .github/shared .github/workflows
+git sparse-checkout set .github/actions .github/shared .github/workflows eng/tools
 git checkout
