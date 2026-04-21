@@ -87,3 +87,8 @@ alias gsync='set -x; git checkout main; gh repo sync; git pull; { set +x; } 2>/d
 
 alias gw='git worktree'
 __git_complete gw _git_worktree
+
+alias gwa='~/scripts/git-worktree-add.sh'
+
+alias gwr='~/scripts/git-worktree-remove.sh'
+__git_complete gwr _git_checkout
