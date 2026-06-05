@@ -31,17 +31,30 @@ command -v fnm >/dev/null 2>&1 && eval "$(fnm env --use-on-cd --shell zsh)"
 export GIT_COMPLETION_CHECKOUT_NO_GUESS="1"
 
 alias g='git'
+compdef g=git
 alias gb='git branch'
+compdef gb=git-branch
 alias gc='git checkout'
+compdef gc=git-checkout
 alias gcl='git clean -xdf'
+compdef gcl=git-clean
 alias gd='git diff'
+compdef gd=git-diff
 alias ge='git commit -m "empty" --allow-empty'
+compdef ge=git-commit
 alias gf='git fetch'
+compdef gf=git-fetch
 alias gl='git log'
+compdef gl=git-log
 alias gm='git merge'
+compdef gm=git-merge
 alias gp='git pull'
+compdef gp=git-pull
 alias gs='git status'
+compdef gs=git-status
 alias gw='git worktree'
+compdef gw=git-worktree
+
 gsync() {
   trap 'set +x' EXIT
   set -x
@@ -53,22 +66,8 @@ gsync() {
 ## Worktree helpers
 alias gwa='~/scripts/git-worktree-add.sh'
 alias gwr='~/scripts/git-worktree-remove.sh'
+compdef gwr=git-checkout
 
 ## GitHub CLI
 alias gpr='gh pr list'
 alias gprme='gh pr list --search "review-requested:@me"'
-
-## Enable git tab-completion for git aliases
-compdef g=git
-compdef gb=git-branch
-compdef gc=git-checkout
-compdef gcl=git-clean
-compdef gd=git-diff
-compdef ge=git-commit
-compdef gf=git-fetch
-compdef gl=git-log
-compdef gm=git-merge
-compdef gp=git-pull
-compdef gs=git-status
-compdef gw=git-worktree
-compdef gwr=git-checkout
