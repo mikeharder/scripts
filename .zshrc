@@ -42,7 +42,13 @@ alias gm='git merge'
 alias gp='git pull'
 alias gs='git status'
 alias gw='git worktree'
-alias gsync='set -x; git checkout main; gh repo sync; git pull; { set +x; } 2>/dev/null'
+gsync() {
+  trap 'set +x' EXIT
+  set -x
+  git checkout main
+  gh repo sync
+  git pull
+}
 
 ## Worktree helpers
 alias gwa='~/scripts/git-worktree-add.sh'
