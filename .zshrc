@@ -59,7 +59,16 @@ alias gpr='gh pr list'
 alias gprme='gh pr list --search "review-requested:@me"'
 
 ## Enable git tab-completion for git aliases
-for a in g gb gc gcl gd gf gl gm gp gs gw gwr; do
-  compdef $a=git
-done
-unset a
+compdef g=git
+compdef gb=git-branch
+compdef gc=git-checkout
+compdef gcl=git-clean
+compdef gd=git-diff
+compdef ge=git-commit
+compdef gf=git-fetch
+compdef gl=git-log
+compdef gm=git-merge
+compdef gp=git-pull
+compdef gs=git-status
+compdef gw=git-worktree
+compdef gwr=git-checkout
