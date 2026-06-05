@@ -4,7 +4,7 @@
 #   . ~/scripts/.zshrc
 # fi
 
-# Custom prompt: current dir + git branch + prompt symbol
+# Custom prompt: git branch + current dir + prompt symbol
 autoload -Uz vcs_info
 precmd() { vcs_info }
 zstyle ':vcs_info:git:*' formats '[%b] '
