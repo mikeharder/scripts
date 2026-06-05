@@ -11,4 +11,4 @@ zstyle ':vcs_info:git:*' formats '[%b] '
 setopt PROMPT_SUBST
 PROMPT='${vcs_info_msg_0_}%~ %# '
 
-eval "$(fnm env --use-on-cd --shell zsh)"
+command -v fnm >/dev/null 2>&1 && eval "$(fnm env --use-on-cd --shell zsh)"
