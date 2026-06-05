@@ -1,4 +1,4 @@
-# Add the following to ~/.zshrc:
+# Add to ~/.zshrc:
 #
 # if [ -f ~/scripts/.zshrc ]; then
 #   . ~/scripts/.zshrc
