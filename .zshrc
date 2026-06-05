@@ -33,40 +33,34 @@ export GIT_COMPLETION_CHECKOUT_NO_GUESS="1"
 alias g='git'
 compdef g=git
 alias gb='git branch'
-compdef gb=git-branch
+compdef _git gb=git-branch
 alias gc='git checkout'
-compdef gc=git-checkout
+compdef _git gc=git-checkout
 alias gcl='git clean -xdf'
-compdef gcl=git-clean
+compdef _git gcl=git-clean
 alias gd='git diff'
-compdef gd=git-diff
+compdef _git gd=git-diff
 alias ge='git commit -m "empty" --allow-empty'
-compdef ge=git-commit
+compdef _git ge=git-commit
 alias gf='git fetch'
-compdef gf=git-fetch
+compdef _git gf=git-fetch
 alias gl='git log'
-compdef gl=git-log
+compdef _git gl=git-log
 alias gm='git merge'
-compdef gm=git-merge
+compdef _git gm=git-merge
 alias gp='git pull'
-compdef gp=git-pull
+compdef _git gp=git-pull
 alias gs='git status'
-compdef gs=git-status
+compdef _git gs=git-status
 alias gw='git worktree'
-compdef gw=git-worktree
+compdef _git gw=git-worktree
 
-gsync() {
-  trap 'set +x' EXIT
-  set -x
-  git checkout main
-  gh repo sync
-  git pull
-}
+alias gsync='set -x; git checkout main; gh repo sync; git pull; { set +x; } 2>/dev/null'
 
 ## Worktree helpers
 alias gwa='~/scripts/git-worktree-add.sh'
 alias gwr='~/scripts/git-worktree-remove.sh'
-compdef gwr=git-checkout
+compdef _git gwr=git-checkout
 
 ## GitHub CLI
 alias gpr='gh pr list'
