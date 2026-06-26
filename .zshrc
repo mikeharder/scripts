@@ -56,8 +56,6 @@ compdef _git gs=git-status
 alias gw='git worktree'
 compdef _git gw=git-worktree
 
-alias gsync='set -x; git checkout main; gh repo sync; git pull; { set +x; } 2>/dev/null'
-
 ## Worktree helpers
 alias gwa='~/scripts/git-worktree-add.sh'
 alias gwr='~/scripts/git-worktree-remove.sh'
@@ -66,3 +64,10 @@ compdef _git gwr=git-checkout
 ## GitHub CLI
 alias gpr='gh pr list'
 alias gprme='gh pr list --search "review-requested:@me"'
+
+## Sync fork with upstream
+sf() {
+  local repo=$(git remote get-url origin | sed -E 's#.*github\.com[:/](.+)\.git#\1#')
+  echo "gh repo sync $repo"
+  gh repo sync "$repo"
+}
