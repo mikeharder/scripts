@@ -111,6 +111,11 @@ while IFS= read -r LINE; do
     echo
 
     if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
+      if gh pr merge --auto --merge "$PR_NUMBER" --repo "$REPO"; then
+        echo "Enabled automerge on PR #$PR_NUMBER"
+      else
+        echo "Warning: Failed to enable automerge on PR #$PR_NUMBER"
+      fi
       if gh pr review "$PR_NUMBER" --repo "$REPO" --approve; then
         echo "Approved PR #$PR_NUMBER"
       else
