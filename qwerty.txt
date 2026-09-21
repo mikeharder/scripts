@@ -1,0 +1,5 @@
+[escape]>[caps]
+[caps]>[escape]
+[scroll]>[vol-]
+[prtscr]>[mute]
+[pause]>[vol+]
