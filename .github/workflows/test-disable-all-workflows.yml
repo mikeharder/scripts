@@ -1,0 +1,35 @@
+name: Test disable-all-workflows.js
+
+on:
+  push:
+    branches:
+      - main
+      - copilot/**
+    paths:
+      - 'disable-all-workflows.js'
+      - 'test-disable-all-workflows.sh'
+      - '.github/workflows/test-disable-all-workflows.yml'
+  pull_request:
+    paths:
+      - 'disable-all-workflows.js'
+      - 'test-disable-all-workflows.sh'
+      - '.github/workflows/test-disable-all-workflows.yml'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Run tests with mocked gh CLI
+        run: ./test-disable-all-workflows.sh
