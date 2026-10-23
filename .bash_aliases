@@ -13,35 +13,6 @@ alias c='clear'
 
 alias ea='nano ~/scripts/.bash_aliases; source ~/scripts/.bash_aliases'
 
-sf() {
-  local repo=$(git remote get-url origin | sed -E 's#.*github\.com[:/](.+)\.git#\1#')
-  echo "gh repo sync $repo"
-  gh repo sync "$repo"
-}
-
-alias tp='~/scripts/tsp-packages.py'
-
-# azure-rest-api-specs
-alias lintdiff='npm exec --yes -- \
-autorest@3.7.1 \
---v3 \
---spectral \
---azure-validator \
---semantic-validator=false \
---model-validator=false \
---openapi-type=data-plane \
---openapi-subtype=data-plane \
---use=@microsoft.azure/openapi-validator@2.2.3'
-
-# azure-rest-api-specs-pr
-gapprove() {
-    local start=$1
-    local end=$2
-    for pr in $(seq "$start" "$end"); do
-        gh pr review "$pr" --approve
-    done
-}
-
 # git
 
 ## Limit completion to only local branches
