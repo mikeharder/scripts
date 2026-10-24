@@ -3,7 +3,7 @@
 #     . ~/scripts/.bash_aliases
 # fi
 
-export PS1='\[\033[01;34m\]\W\[\033[00m\]\$ '
+export PS1='\[\033[01;34m\][\W]\[\033[00m\]\$ '
 
 source /usr/share/bash-completion/completions/git
 
